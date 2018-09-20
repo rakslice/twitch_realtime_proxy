@@ -150,9 +150,10 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             if connection_closed:
                 break
 
-            print "waiting for next playlist time"
-            while time.time() < next_playlist_time:
-                time.sleep(0.125)
+            if time.time() < next_playlist_time:
+                print "waiting for next playlist time"
+                while time.time() < next_playlist_time:
+                    time.sleep(0.125)
 
             print "loading next playlist"
             data = contents(playlist_url)
